@@ -10,6 +10,11 @@ class Article
 
     public function getSlug(): string {
         $slug = $this->title;
-        return preg_replace('/\s+/', '_', $slug);
+
+        $slug = preg_replace('/\s+/', '_', $slug);
+
+        $slug = preg_replace('/[^\w]+/', '', $slug);
+
+        return trim($slug, "_");
     }
 }
