@@ -24,4 +24,24 @@ class ItemTest extends TestCase
         $this->assertIsInt($itemChild->getId());
     }
 
+    /**
+     * @throws ReflectionException
+     */
+    public function testGetTokenIsReturnString() {
+        $item = new Item();
+        $reflector = new ReflectionClass(Item::class);
+        $method = $reflector->getMethod('getToken');
+        $method->setAccessible(true);
+        $result = $method->invoke($item);
+        $this->assertIsString($result);
+    }
+
+    public function testGetTokenWithPrefix() {
+        $item = new Item();
+        $reflector = new ReflectionClass(Item::class);
+        $method = $reflector->getMethod('getTokenWithPrefix');
+        $method->setAccessible(true);
+        $result = $method->invokeArgs($item, ['mzp']);
+        $this->assertIsString($result);
+    }
 }

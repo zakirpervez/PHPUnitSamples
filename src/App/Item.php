@@ -15,4 +15,8 @@ class Item
     private function getToken(): string {
         return uniqid();
     }
+
+    private function getTokenWithPrefix(string $prefix): string {
+        return uniqid($prefix);
+    }
 }

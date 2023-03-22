@@ -2,6 +2,8 @@
 
 namespace App;
 
+use http\Encoding\Stream\Inflate;
+
 class ItemChild extends Item
 {
     public function getId(): int
