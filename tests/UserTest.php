@@ -2,7 +2,7 @@
 
 namespace App;
 
-use PhpParser\Node\Expr\UnaryMinus;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
@@ -37,5 +37,15 @@ class UserTest extends TestCase
             return true;
         } ); // method 2
         $this->assertTrue($user->notifyStaticCallableWithInjection('Hello'));
+    }
+
+    public function testNotifyWithMockery() {
+        $user = new User('mz@example.com');
+        $mock = Mockery::mock('alias:Mailer');
+        $mock->shouldReceive('send')
+        ->once()
+        ->with($user->email, 'Hello')
+        ->andReturn(true);
+        $this->assertTrue($user->notifyStatic('Hello'));
     }
 }
